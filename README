@@ -1,4 +1,9 @@
-Make and run with 0.18 as the command line argument.
+Instructions
+============
+Compile the program with "make" and run with "./run"
 
+
+Results
+=======
 V0: 
 V1: 
