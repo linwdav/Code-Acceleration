@@ -1,4 +1,4 @@
-CFLAGS = 
+CFLAGS = -pg
 
 app: main.cpp
 	g++ $(CFLAGS) main.cpp -o app
