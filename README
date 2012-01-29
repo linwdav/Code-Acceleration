@@ -1,9 +1,25 @@
-Instructions
-============
-Compile the program with "make" and run with "./run"
+INSTRUCTIONS
+=============================================================
+Compile the program with "make"
+
+Run with "./run"
+
+Verify with "diff GHZ_original_output.txt GHZ_output.txt"
+
+Profiler output is in "profiler_output.txt"
+
+Program execution time is in "execution_time.txt"
 
 
-Results
-=======
-V0: 
-V1: 
+
+NOTES
+=============================================================
+V0
+Original unmodified application
+
+V1
+Add gprof profiler and program execution time
+Total runtime: 2m22.690s
+
+V2
+
