@@ -1,19 +1,21 @@
 INSTRUCTIONS
-=============================================================
-Compile the program with "make"
+=============================================================================
+Compile the program with "make".
 
-Run with "./run"
+Run with "./run".  This will output three files:
+	GHZ_output.txt
+	profiler_output.txt
+	execution_time.txt
 
-Verify with "diff GHZ_original_output.txt GHZ_output.txt"
+Verify calculation by running "diff GHZ_original_output.txt GHZ_output.txt"
 
-Profiler output is in "profiler_output.txt"
+Open profiler_output.txt to see how the program spent its time in execution
 
-Program execution time is in "execution_time.txt"
-
+Open execution_time.txt to see how long the entire program took to run
 
 
 NOTES
-=============================================================
+=============================================================================
 V0
 Original unmodified application
 
@@ -22,4 +24,8 @@ Add gprof profiler and program execution time
 Total runtime: 2m22.690s
 
 V2
+Reduced the 221005344 calls to running_total(int) to 0
+Total runtime: 2m20.260s
+
+V3
 
