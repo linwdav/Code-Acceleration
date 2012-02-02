@@ -562,7 +562,9 @@ void process_SN_end_subsection()
                               wrap_flag=1;                              
                               }
                                  
-                              for (long int j=get_star_range_lower(i); j<=get_star_range_upper(i); j++)
+
+                              long int star_range_upper = get_star_range_upper(i);
+                              for (long int j=get_star_range_lower(i); j<=star_range_upper; j++)
                               {
                                   
                                   normal_ster_flag=0;
@@ -724,7 +726,8 @@ void process_SN()
                               
                                   //  sn_debug << "\nstar range lower self "<<get_star_range_lower(i);
                                    // sn_debug << "\nstar range upper self: "<<get_star_range_upper(i);
-                              for (long int j=get_star_range_lower(i); j<=get_star_range_upper(i); j++)
+                              long int star_range_upper = get_star_range_upper(i);
+                              for (long int j=get_star_range_lower(i); j<=star_range_upper; j++)
                               {
                                   normal_ster_flag=0;
                                   wrap_ster_flag=0;
@@ -837,7 +840,8 @@ void process_SN()
                             // sn_debug << "star: "<<i<<" went SN"<<"  Cell: "<<star1[i].cell<<"  Subsection: "<<star1[i].subsection_z<<"  Column: "<<subsect_param_array[star1[i].cell]->subsection_xy;   
                                 //        sn_debug << "\nstar range lower right: "<<get_star_range_lower_cell_right(star1[i].cell);
                                //     sn_debug << "\nstar range upper right: "<<get_star_range_upper_cell_right(star1[i].cell);
-                              for (long int k=get_star_range_lower_cell_right(star1[i].cell); k<=get_star_range_upper_cell_right(star1[i].cell); k++)
+                              long int star_range_upper_cell_right = get_star_range_upper_cell_right(star1[i].cell);
+                              for (long int k=get_star_range_lower_cell_right(star1[i].cell); k<=star_range_upper_cell_right; k++)
                               {
                                   normal_ster_flag=0;
                                   wrap_ster_flag=0;
@@ -1002,8 +1006,8 @@ void process_SN()
                               wrap_flag=1;                              
                               }
                        
-                
-                           for (long int m=get_star_range_lower_cell_left(star2[l].cell); m<=get_star_range_upper_cell_left(star2[l].cell); m++)
+                           long int star_range_upper_cell_left = get_star_range_upper_cell_left(star2[l].cell);
+                           for (long int m=get_star_range_lower_cell_left(star2[l].cell); m<=star_range_upper_cell_left; m++)
                               {
                                   normal_ster_flag=0;
                                   wrap_ster_flag=0;    

@@ -1,6 +1,6 @@
 INSTRUCTIONS
 =============================================================================
-Compile the program with "make".
+Compile the program with "make"
 
 Run with "./run".  This will output three files:
 	GHZ_output.txt
@@ -27,5 +27,5 @@ V2
 Reduced the 221005344 calls to running_total(int) to 0
 Total runtime: 2m20.260s
 
-V3
-
+Applied concept of "code motion" on for loops in main.c
+Total runtime: 0m44.250s
