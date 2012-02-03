@@ -29,3 +29,7 @@ Total runtime: 2m20.260s
 
 Applied concept of "code motion" on for loops in main.c
 Total runtime: 0m44.250s
+
+V3
+Reduced unnecessary check condition in for loops, e.g. from i<=var to i<var+1
+Total runtime: 0m42.570s
