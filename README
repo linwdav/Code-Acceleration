@@ -13,6 +13,30 @@ Open profiler_output.txt to see how the program spent its time in execution
 
 Open execution_time.txt to see how long the entire program took to run
 
+Note: Mac OS X is missing gprof, so run program in Windows or Linux
+
+
+
+RESULTS
+=============================================================================
+The original application took 142.690 seconds to run.
+
+My code-optimized application (V3) took 44.007 seconds to run. This is 324%
+faster than the original application.
+
+The application with manual+compiler optimization level 3 took 15.524 seconds
+to run. This is 919% faster than the original application.
+
+The original application with compiler-only optimization at level 3 took
+36.408 seconds to run. This is 392% faster than the original application.
+
+In conclusion, the code was accelerated to the greatest speed when using a
+combination of manual+compiler optimization.
+
+
+Note: These results were obtained on a dual-core virtual machine in Linux
+
+
 
 NOTES
 =============================================================================
@@ -45,6 +69,25 @@ Total runtime: 0m52.451s
 
 OpenMP overhead not worth it, commented out omp parallel sections
 
+Applied strength reduction and constant propagation techniques to
+	wrap_around_function, negligible effect
+
 V4
 --
+Compile with -O option
+Total runtime: 0m26.098s
 
+Compile with -O1 option
+Total runtime: 0m25.894s
+
+Compile with -O2 option
+Total runtime: 0m25.214s
+
+Compile with -O3 option
+Total runtime: 0m15.524s
+
+V5
+--
+In order to see if my manual optimizations made any difference, I copied
+	over V1 but compiled with -O3 option
+Total runtime: 0m36.408s

@@ -7,8 +7,7 @@ double evalfpoly(int order, double x, double *c)
   int i,j;
   double y=c[0];
   x=(x-(0.000000000000000))/(5.729577951308232);
-  int cond = order+1;
-  for(i=1,j=1;j<cond;j+=2,i++)
+  for(i=1,j=1;j<=order;j+=2,i++)
     y += c[j]*cos(i*x)+c[j+1]*sin(i*x);
   return y;
 }

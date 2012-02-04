@@ -1,0 +1,2 @@
+(time ./app 0.18) 2> execution_time.txt
+gprof app > profiler_output.txt
