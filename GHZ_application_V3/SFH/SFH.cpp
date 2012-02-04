@@ -55,7 +55,7 @@ area_part[6]= ((SFR_10Gyr(radius)+SFR_12Gyr(radius))/2)*2;
 area_part[7]= ((SFR_12Gyr(radius)+SFR_136Gyr(radius))/2)*1.6;
 
 
-for (int i=1; i<8;i++)
+for (int i=1; i<=7;i++)
 {
  total_area+=area_part[i];
  cumulative_area[i]=total_area;
@@ -72,7 +72,7 @@ partial_area=total_area*random_num;
 //cout <<"\n\npartial_area: "<<partial_area;
 //find the area that the partial area is found
 
-for (int i=1; i<8;i++)
+for (int i=1; i<=7;i++)
 {
    if(partial_area >= cumulative_area[i-1] && partial_area <= cumulative_area[i])
         {

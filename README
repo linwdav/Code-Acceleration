@@ -17,19 +17,34 @@ Open execution_time.txt to see how long the entire program took to run
 NOTES
 =============================================================================
 V0
+--
 Original unmodified application
 
 V1
+--
 Add gprof profiler and program execution time
 Total runtime: 2m22.690s
 
 V2
+--
 Reduced the 221005344 calls to running_total(int) to 0
-Total runtime: 2m20.260s
-
-Applied concept of "code motion" on for loops in main.c
-Total runtime: 0m44.250s
+Applied concept of "code motion" to for loops in main.c
+Total runtime: 0m45.851s
 
 V3
+--
 Reduced unnecessary check condition in for loops, e.g. from i<=var to i<var+1
-Total runtime: 0m42.570s
+Total runtime: 0m44.007s
+
+Parallelized copy_star2_into_star1 and copy_temp_into_star2 functions with
+	OpenMP, but execution was slower
+Total runtime: 0m50.476s
+
+Parallelized loops in process_SN, but execution was slower
+Total runtime: 0m52.451s
+
+OpenMP overhead not worth it, commented out omp parallel sections
+
+V4
+--
+

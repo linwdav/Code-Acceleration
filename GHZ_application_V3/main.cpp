@@ -679,13 +679,18 @@ void process_SN()
      float max_time_fn=max_time;
      int normal_ster_flag=0;
      int wrap_ster_flag=0;
+
      //always looking for the SN as they occur in star1
      //eg 1->1, 1->2, 2->1
      
          //********************************
          //1->1 on itself and 1->2
 
-         for (long int i=1; i<ptr_1_range+1; i++)
+         long int i;
+//#pragma omp parallel shared(star1, star2, total_sterilizations_II, total_sterilizations_Ia) private(i, normal_ster_flag, wrap_ster_flag, birthdate_candidate, deathdate_candidate, distance, distance2, sterilization_distance, sn_type, birthdate_sn, deathdate_sn, sn_x, sn_y, sn_z, wrap_flag)
+//{
+//         #pragma omp for schedule(dynamic)
+         for (i=1; i<ptr_1_range+1; i++)
          {
             
              //********************************
@@ -728,8 +733,11 @@ void process_SN()
                                   //  sn_debug << "\nstar range lower self "<<get_star_range_lower(i);
                                    // sn_debug << "\nstar range upper self: "<<get_star_range_upper(i);
                               long int star_range_upper = get_star_range_upper(i);
-                              
-                              for (long int j=get_star_range_lower(i); j<star_range_upper+1; j++)
+                              long int j;
+//#pragma omp parallel shared(star1, star2, total_sterilizations_II, total_sterilizations_Ia) private(j, normal_ster_flag, wrap_ster_flag, birthdate_candidate, deathdate_candidate, distance, distance2)
+//{
+                              //#pragma omp for schedule(dynamic)
+                              for (j=get_star_range_lower(i); j<star_range_upper+1; j++)
                               {
                                   normal_ster_flag=0;
                                   wrap_ster_flag=0;
@@ -818,13 +826,17 @@ void process_SN()
                                     {
                                           
                                           if (sn_type==1)
-                                          {  
+                                          {
+                                           //#pragma omp atomic
                                            star1[j].sterilized_count++;
+                                           //#pragma omp atomic
                                            total_sterilizations_II++;
                                            }           
                                            else if (sn_type==2)
                                            {
+                                            //#pragma omp atomic
                                             star1[j].sterilized_count++; 
+                                            //#pragma omp atomic
                                             total_sterilizations_Ia++;
                                            } 
                                     }  
@@ -833,6 +845,8 @@ void process_SN()
                               
                                   
                               } //end of loop for sterilizations 1->1
+
+//} //end of omp pragma
                               
                               
          //********************************
@@ -843,7 +857,11 @@ void process_SN()
                                 //        sn_debug << "\nstar range lower right: "<<get_star_range_lower_cell_right(star1[i].cell);
                                //     sn_debug << "\nstar range upper right: "<<get_star_range_upper_cell_right(star1[i].cell);
                               long int star_range_upper_cell_right = get_star_range_upper_cell_right(star1[i].cell);
-                              for (long int k=get_star_range_lower_cell_right(star1[i].cell); k<star_range_upper_cell_right+1; k++)
+                              long int k;
+//#pragma omp parallel shared(star1, star2, total_sterilizations_II, total_sterilizations_Ia) private(k, normal_ster_flag, wrap_ster_flag, birthdate_candidate, deathdate_candidate, distance, distance2)
+//{
+                              //#pragma omp for schedule(dynamic)
+                              for (k=get_star_range_lower_cell_right(star1[i].cell); k<star_range_upper_cell_right+1; k++)
                               {
                                   normal_ster_flag=0;
                                   wrap_ster_flag=0;
@@ -944,22 +962,22 @@ void process_SN()
                                                   
                                                   if (sn_type==1)
                                                   {
-  
+                                                   //#pragma omp atomic
                                                    star2[k].sterilized_count++;
-                                                 
+                                                   //#pragma omp atomic
                                                    total_sterilizations_II++;
                                                    }           
                                                    else if (sn_type==2)
                                                    {
-
-                                                    star2[k].sterilized_count++;  
+                                                    //#pragma omp atomic
+                                                    star2[k].sterilized_count++;
+                                                    //#pragma omp atomic  
                                                     total_sterilizations_Ia++;
-
                                                    } 
                                               }  
                                            
                               }  //end of for loop for 1->2 sterilizations
-                            
+                              //}  //end of pragma omp
                                         
                      } //end of if sterilization in star1
                      
@@ -968,6 +986,8 @@ void process_SN()
        
          
          }   //end of 1->1 and 1->2- the loop that scans through all of star1 
+
+//} //end of omp pragma
          
            //********************************
          //2->1 
@@ -1297,11 +1317,12 @@ int max_len_ster_hist_fn=max_len_ster_hist;
 void copy_star2_into_star1(long int length)
 {
 int max_len_ster_hist_fn=max_len_ster_hist;
-
-
-
 star1 = new star_cell [length+1];
-     for (long int i=1; i<length+1; i++)
+long int i;
+//#pragma omp parallel shared(star1, star2) private(i)
+//{
+//     #pragma omp for schedule(dynamic)
+     for (i=1; i<length+1; i++)
      {
    
          
@@ -1323,6 +1344,7 @@ star1 = new star_cell [length+1];
      
      } 
       
+//}
 
 }
 
@@ -1333,7 +1355,11 @@ int max_len_ster_hist_fn=max_len_ster_hist;
 
 //star2 = (struct star_cell **)realloc(star2, (length+1) * sizeof(struct star_cell *));  
 star2 = new star_cell [length+1];
-     for (long int i=1; i<length+1; i++)
+long int i;
+//#pragma omp parallel shared(star2, star) private(i)
+//{
+//     #pragma omp for schedule(dynamic)
+     for (i=1; i<length+1; i++)
      {
          
          star2[i].cell=star[i].cell;    
@@ -1355,7 +1381,7 @@ star2 = new star_cell [length+1];
         
       }
 
-  
+//}
 
 }
 
